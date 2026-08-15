@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>رسالة لك ♡</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="scene">
+
+  <canvas id="fireworks"></canvas>
+
+  <!-- زخارف -->
+  <div class="confetti">
+    <i>✦</i><i>♡</i><i>✿</i><i>★</i><i>✦</i>
+    <i>♥</i><i>✧</i><i>✿</i><i>★</i><i>♡</i>
+  </div>
+
+
+  <!-- =========================
+       المرحلة الأولى
+       الظرف المغلق
+  ========================== -->
+
+  <section class="screen closed-screen">
+
+    <div class="paper-label title-label">
+      رسالة خاصة لك <span>♥</span>
+    </div>
+
+    <button
+      class="envelope-button"
+      id="envelopeButton"
+      aria-label="فتح الظرف"
+    >
+
+      <div class="envelope closed-envelope">
+
+        <div class="envelope-flap"></div>
+        <div class="envelope-body"></div>
+
+        <div class="heart-seal">♥</div>
+
+      </div>
+
+    </button>
+
+
+    <div class="paper-label tap-label">
+      اضغطي على الظرف<br>
+      لفتح الرسالة <span>♡</span>
+    </div>
+
+
+    <!-- البالونات -->
+
+    <div class="balloon balloon-purple b1">
+      <span></span>
+    </div>
+
+    <div class="balloon balloon-pink b2">
+      <span></span>
+    </div>
+
+    <div class="balloon balloon-yellow b3">
+      <span></span>
+    </div>
+
+
+    <!-- الزهور -->
+
+    <div class="flower flower-pink f1">
+      <b></b><b></b><b></b><b></b><b></b>
+      <em></em>
+    </div>
+
+    <div class="flower flower-purple f2">
+      <b></b><b></b><b></b><b></b><b></b>
+      <em></em>
+    </div>
+
+
+    <!-- الكيكة -->
+
+    <div class="cake">
+
+      <div class="candle c1">
+        <span></span>
+      </div>
+
+      <div class="candle c2">
+        <span></span>
+      </div>
+
+      <div class="candle c3">
+        <span></span>
+      </div>
+
+      <div class="cake-top"></div>
+      <div class="cake-cream"></div>
+      <div class="cake-body"></div>
+      <div class="cake-plate"></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       المرحلة الثانية
+       الظرف المفتوح
+  ========================== -->
+
+  <section class="screen open-screen">
+
+    <div class="paper-label title-label">
+      رسالة خاصة لك <span>♥</span>
+    </div>
+
+
+    <div class="open-envelope" id="openEnvelope">
+
+      <div class="open-back"></div>
+
+
+      <!-- الورقة -->
+
+      <div class="letter-paper">
+
+        <span class="letter-decoration">
+          ♥
+        </span>
+
+        <h2>
+          لصديقتي العزيزة
+        </h2>
+
+        <div class="line"></div>
+
+        <p>
+          كل عام وأنتِ بخير<br>
+          ووجودك في حياتي<br>
+          أجمل نعمة.<br><br>
+
+          شكرًا لأنك دائمًا<br>
+          نور أيامي.
+        </p>
+
+        <span class="tiny-heart">
+          ♥
+        </span>
+
+      </div>
+
+
+      <div class="open-front"></div>
+
+
+      <!-- منطقة الضغط على الرسالة -->
+
+      <button
+        class="letter-button"
+        id="letterButton"
+        aria-label="فتح الرسالة"
+      >
+        اضغطي على الرسالة
+      </button>
+
+    </div>
+
+
+    <!-- البالونات -->
+
+    <div class="balloon balloon-purple b4">
+      <span></span>
+    </div>
+
+    <div class="balloon balloon-pink b5">
+      <span></span>
+    </div>
+
+    <div class="balloon balloon-yellow b6">
+      <span></span>
+    </div>
+
+
+    <!-- الزهور -->
+
+    <div class="flower flower-pink f3">
+      <b></b><b></b><b></b><b></b><b></b>
+      <em></em>
+    </div>
+
+    <div class="flower flower-purple f4">
+      <b></b><b></b><b></b><b></b><b></b>
+      <em></em>
+    </div>
+
+
+    <!-- الكيكة -->
+
+    <div class="cake open-cake">
+
+      <div class="candle c1">
+        <span></span>
+      </div>
+
+      <div class="candle c2">
+        <span></span>
+      </div>
+
+      <div class="candle c3">
+        <span></span>
+      </div>
+
+      <div class="cake-top"></div>
+      <div class="cake-cream"></div>
+      <div class="cake-body"></div>
+      <div class="cake-plate"></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       الرسالة النهائية
+  ========================== -->
+
+  <div
+    class="message-overlay"
+    id="messageOverlay"
+  >
+
+    <article class="message-card">
+
+      <button
+        class="close-message"
+        id="closeMessage"
+      >
+        ×
+      </button>
+
+
+      <div class="card-flower">
+        ✿
+      </div>
+
+
+      <h2>
+        لصديقتي العزيزة ♡
+      </h2>
+
+
+      <div class="card-line"></div>
+
+
+      <p>
+
+        كل عام وأنتِ بخير
+        يا أجمل صديقة.
+
+        <br><br>
+
+        شكرًا لكل الضحكات والذكريات
+        واللحظات الجميلة اللي جمعتنا.
+
+        <br><br>
+
+        أتمنى سنتك الجديدة تكون مليانة
+        فرح ونجاح وأشياء حلوة تشبهك.
+
+        <br><br>
+
+        أحبك يا صديقتي ♡
+
+      </p>
+
+    </article>
+
+  </div>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

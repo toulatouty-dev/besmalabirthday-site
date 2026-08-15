@@ -1,0 +1,1594 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --pink: #df7890;
+  --dark-pink: #bd5d78;
+
+  --paper: #f1dfc3;
+  --paper-dark: #d8bd99;
+
+  --ink: #49383a;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+
+  background: #080709;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+button {
+  font: inherit;
+}
+
+
+/* =========================
+   الخلفية
+========================= */
+
+.scene {
+
+  position: relative;
+
+  width: 100%;
+  height: 100svh;
+
+  min-height: 600px;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      #21151d 0%,
+      #0d0a0e 65%,
+      #060608 100%
+    );
+}
+
+
+/* ملمس ورقي */
+
+.scene::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 50;
+
+  pointer-events: none;
+
+  opacity: .14;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.06) 0 1px,
+      transparent 1px 4px
+    ),
+
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 0 1px,
+      transparent 1px 5px
+    );
+}
+
+
+/* الألعاب النارية */
+
+#fireworks {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+
+/* =========================
+   الشاشات
+========================= */
+
+.screen {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 5;
+
+  transition:
+    opacity .65s ease,
+    transform .65s ease;
+}
+
+
+.open-screen {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    scale(.96)
+    translateY(18px);
+}
+
+
+.scene.opened .closed-screen {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform: scale(.98);
+}
+
+
+.scene.opened .open-screen {
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+  transform: none;
+}
+
+
+
+/* =========================
+   الورقة الصغيرة
+========================= */
+
+.paper-label {
+
+  position: absolute;
+
+  z-index: 12;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%)
+    rotate(-1deg);
+
+  width: max-content;
+
+  max-width: 78vw;
+
+  padding: 10px 22px;
+
+  color: #3f3031;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f1dfc4,
+      #ddc29e
+    );
+
+  border-radius: 3px;
+
+  box-shadow:
+    2px 3px 0 rgba(0,0,0,.2);
+
+  font-size:
+    clamp(
+      16px,
+      4.5vw,
+      21px
+    );
+
+  text-align: center;
+}
+
+
+.title-label {
+  top: 5%;
+}
+
+
+.paper-label span {
+  color: var(--pink);
+}
+
+
+.tap-label {
+
+  top: 14%;
+
+  line-height: 1.7;
+
+  font-size:
+    clamp(
+      13px,
+      3.7vw,
+      17px
+    );
+
+  animation:
+    floatLabel
+    2.2s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes floatLabel {
+
+  50% {
+
+    transform:
+      translateX(-50%)
+      translateY(-5px)
+      rotate(-1deg);
+
+  }
+
+}
+
+
+
+/* =========================
+   الظرف المغلق
+========================= */
+
+.envelope-button {
+
+  position: absolute;
+
+  left: 50%;
+  top: 32%;
+
+  width:
+    min(
+      76vw,
+      350px
+    );
+
+  border: 0;
+
+  background: none;
+
+  transform:
+    translateX(-50%);
+
+  cursor: pointer;
+
+  z-index: 15;
+}
+
+
+.envelope-button:hover {
+
+  filter: brightness(1.06);
+}
+
+
+.envelope-button:focus-visible {
+
+  outline:
+    2px solid #f2a1b4;
+
+  outline-offset: 8px;
+}
+
+
+.envelope {
+
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1.5;
+}
+
+
+
+/* جسم الظرف */
+
+.envelope-body {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e898a9,
+      #ce7189
+    );
+
+  border-radius: 5px;
+
+  box-shadow:
+    0 14px 16px rgba(0,0,0,.4),
+
+    inset
+    0 0 0 2px
+    rgba(130,65,77,.25);
+}
+
+
+/* مثلثات الظرف */
+
+.envelope-body::before,
+.envelope-body::after {
+
+  content: "";
+
+  position: absolute;
+
+  bottom: 0;
+
+  width: 54%;
+
+  height: 100%;
+
+  background: #d47d91;
+}
+
+
+.envelope-body::before {
+
+  left: 0;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+
+.envelope-body::after {
+
+  right: 0;
+
+  clip-path:
+    polygon(
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+
+/* غطاء الظرف */
+
+.envelope-flap {
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 62%;
+
+  z-index: 4;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eba0ae,
+      #d47b91
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+
+  transform-origin: top center;
+
+  filter:
+    drop-shadow(
+      0 3px 2px
+      rgba(80,35,45,.28)
+    );
+
+  transition:
+    transform .55s ease;
+}
+
+
+/* القلب */
+
+.heart-seal {
+
+  position: absolute;
+
+  left: 50%;
+  top: 56%;
+
+  transform:
+    translate(-50%, -50%);
+
+  z-index: 8;
+
+  color: #ffdbe1;
+
+  font-size: 31px;
+
+  filter:
+    drop-shadow(
+      2px 3px 1px
+      rgba(0,0,0,.25)
+    );
+}
+
+
+/* الضغط */
+
+.envelope-button.pressed {
+
+  animation:
+    envelopePress
+    .48s
+    ease;
+}
+
+
+.envelope-button.pressed
+.envelope-flap {
+
+  transform:
+    rotateX(12deg);
+}
+
+
+@keyframes envelopePress {
+
+  0% {
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+  35% {
+    transform:
+      translateX(-50%)
+      scale(.92)
+      rotate(-1deg);
+  }
+
+  65% {
+    transform:
+      translateX(-50%)
+      scale(1.03)
+      rotate(1deg);
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+}
+
+
+
+/* =========================
+   الظرف المفتوح
+========================= */
+
+.open-envelope {
+
+  position: absolute;
+
+  left: 50%;
+  top: 22%;
+
+  width:
+    min(
+      78vw,
+      370px
+    );
+
+  aspect-ratio: 1 / 1.15;
+
+  transform:
+    translateX(-50%);
+
+  cursor: pointer;
+
+  z-index: 15;
+
+  transition:
+    transform .35s ease;
+}
+
+
+.open-envelope:hover {
+
+  transform:
+    translateX(-50%)
+    translateY(-5px)
+    rotate(-.5deg);
+}
+
+
+/* ظهر الظرف */
+
+.open-back {
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 70%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e496a6,
+      #cc7187
+    );
+
+  border-radius: 5px;
+}
+
+
+/* الورقة */
+
+.letter-paper {
+
+  position: absolute;
+
+  left: 9%;
+  top: 0;
+
+  width: 82%;
+  height: 74%;
+
+  z-index: 3;
+
+  padding:
+    25px 18px;
+
+  color: var(--ink);
+
+  background:
+    linear-gradient(
+      135deg,
+      #f6e6c9,
+      #e5cba8
+    );
+
+  border:
+    1px dashed
+    rgba(100,70,55,.35);
+
+  box-shadow:
+    3px 5px 5px
+    rgba(0,0,0,.22);
+
+  transform:
+    rotate(-1deg);
+
+  text-align: center;
+}
+
+
+.letter-paper::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 7px;
+
+  border:
+    1px dashed
+    rgba(130,90,70,.18);
+
+  pointer-events: none;
+}
+
+
+.letter-paper h2 {
+
+  font-size:
+    clamp(
+      18px,
+      5vw,
+      24px
+    );
+
+  margin-bottom: 8px;
+}
+
+
+.letter-paper .line {
+
+  width: 70%;
+
+  height: 2px;
+
+  margin:
+    0 auto 15px;
+
+  background:
+    var(--pink);
+}
+
+
+.letter-paper p {
+
+  font-size:
+    clamp(
+      13px,
+      3.7vw,
+      17px
+    );
+
+  line-height: 1.8;
+}
+
+
+.letter-decoration,
+.tiny-heart {
+
+  color: var(--pink);
+}
+
+
+.letter-decoration {
+
+  position: absolute;
+
+  top: 9px;
+  right: 13px;
+}
+
+
+.tiny-heart {
+
+  display: block;
+
+  margin-top: 7px;
+}
+
+
+/* مقدمة الظرف */
+
+.open-front {
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 48%;
+
+  z-index: 5;
+
+  background: #d47c91;
+
+  clip-path:
+    polygon(
+      0 0,
+      50% 54%,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+
+  filter:
+    drop-shadow(
+      0 -2px 2px
+      rgba(80,35,45,.22)
+    );
+}
+
+
+/* منطقة الضغط */
+
+.letter-button {
+
+  position: absolute;
+
+  z-index: 10;
+
+  left: 50%;
+  top: 17%;
+
+  transform:
+    translateX(-50%);
+
+  width: 65%;
+  height: 50%;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  border: 0;
+
+  background: transparent;
+}
+
+
+
+/* =========================
+   الكيكة
+========================= */
+
+.cake {
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -2%;
+
+  width:
+    min(
+      43vw,
+      180px
+    );
+
+  height: 145px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 14;
+
+  transition:
+    transform .3s ease;
+}
+
+
+.cake:hover {
+
+  transform:
+    translateX(-50%)
+    translateY(-7px)
+    rotate(-1deg);
+}
+
+
+.cake-plate {
+
+  position: absolute;
+
+  bottom: 2px;
+  left: -10%;
+
+  width: 120%;
+  height: 18px;
+
+  background: #f2e9d9;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 4px 3px
+    rgba(0,0,0,.2);
+}
+
+
+.cake-body {
+
+  position: absolute;
+
+  bottom: 15px;
+  left: 5%;
+
+  width: 90%;
+  height: 82px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d8aa72,
+      #efc78f,
+      #d6a66d
+    );
+
+  border-radius:
+    8px 8px 15px 15px;
+
+  box-shadow:
+    inset 0 -5px 0
+    rgba(160,100,55,.15);
+}
+
+
+.cake-cream {
+
+  position: absolute;
+
+  bottom: 76px;
+  left: 3%;
+
+  width: 94%;
+  height: 28px;
+
+  background: #e87896;
+
+  border-radius:
+    12px 12px 7px 7px;
+
+  z-index: 3;
+}
+
+
+.cake-cream::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 8%;
+  bottom: -12px;
+
+  width: 18px;
+  height: 22px;
+
+  background: #e87896;
+
+  border-radius:
+    0 0 12px 12px;
+
+  box-shadow:
+    38px 2px 0 #e87896,
+    78px -1px 0 #e87896,
+    112px 3px 0 #e87896;
+}
+
+
+.cake-top {
+
+  position: absolute;
+
+  left: 5%;
+  bottom: 89px;
+
+  width: 90%;
+  height: 24px;
+
+  background: #f08aa1;
+
+  border-radius: 50%;
+
+  z-index: 4;
+}
+
+
+.candle {
+
+  position: absolute;
+
+  bottom: 104px;
+
+  width: 14px;
+  height: 42px;
+
+  border-radius: 3px;
+
+  z-index: 6;
+
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #d9c3ed 0 7px,
+      #a27cb8 7px 13px
+    );
+}
+
+
+.c1 {
+  left: 28%;
+}
+
+
+.c2 {
+
+  left: 47%;
+
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #ffd0d7 0 7px,
+      #dc7890 7px 13px
+    );
+}
+
+
+.c3 {
+
+  right: 27%;
+
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #b8dfed 0 7px,
+      #65a7bc 7px 13px
+    );
+}
+
+
+.candle span {
+
+  position: absolute;
+
+  width: 9px;
+  height: 13px;
+
+  left: 50%;
+  top: -13px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    #f6a62d;
+
+  border-radius:
+    50% 50% 50% 50% /
+    65% 65% 35% 35%;
+
+  animation:
+    flame
+    .8s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+@keyframes flame {
+
+  to {
+
+    transform:
+      translateX(-50%)
+      scale(.8)
+      rotate(4deg);
+
+  }
+
+}
+
+
+
+/* =========================
+   البالونات
+========================= */
+
+.balloon {
+
+  position: absolute;
+
+  width: 58px;
+  height: 76px;
+
+  z-index: 12;
+
+  border-radius:
+    50% 50% 45% 45%;
+
+  box-shadow:
+    inset -8px -8px 0
+    rgba(0,0,0,.08),
+
+    inset 8px 8px 0
+    rgba(255,255,255,.08);
+
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+}
+
+
+.balloon::after {
+
+  content: "";
+
+  position: absolute;
+
+  bottom: -7px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  width: 8px;
+  height: 8px;
+
+  background: inherit;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+}
+
+
+.balloon span {
+
+  position: absolute;
+
+  top: 100%;
+  left: 50%;
+
+  width: 1px;
+  height: 100px;
+
+  background: #e9d9d1;
+
+  transform: rotate(4deg);
+
+  transform-origin: top;
+}
+
+
+.balloon:hover {
+
+  transform:
+    translateY(-9px)
+    rotate(-5deg)
+    scale(1.08);
+
+  filter:
+    brightness(1.1);
+}
+
+
+.balloon-purple {
+  background: #8d75a8;
+}
+
+
+.balloon-pink {
+  background: #dc7188;
+}
+
+
+.balloon-yellow {
+  background: #e6a13f;
+}
+
+
+.b1 {
+  left: 4%;
+  top: 27%;
+}
+
+
+.b2 {
+  left: 2%;
+  top: 39%;
+  transform: scale(.8);
+}
+
+
+.b3 {
+  left: 5%;
+  top: 51%;
+  transform: scale(.72);
+}
+
+
+.b4 {
+  right: 4%;
+  top: 27%;
+}
+
+
+.b5 {
+  right: 2%;
+  top: 39%;
+  transform: scale(.8);
+}
+
+
+.b6 {
+  right: 5%;
+  top: 51%;
+  transform: scale(.72);
+}
+
+
+
+/* =========================
+   الزهور
+========================= */
+
+.flower {
+
+  position: absolute;
+
+  width: 72px;
+  height: 72px;
+
+  z-index: 13;
+
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+}
+
+
+.flower b {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 28px;
+  height: 38px;
+
+  transform-origin:
+    50% 100%;
+
+  border-radius:
+    60% 60% 45% 45%;
+
+  background: #df7991;
+}
+
+
+.flower b:nth-child(1) {
+  transform:
+    translate(-50%,-100%)
+    rotate(0);
+}
+
+
+.flower b:nth-child(2) {
+  transform:
+    translate(-50%,-100%)
+    rotate(72deg);
+}
+
+
+.flower b:nth-child(3) {
+  transform:
+    translate(-50%,-100%)
+    rotate(144deg);
+}
+
+
+.flower b:nth-child(4) {
+  transform:
+    translate(-50%,-100%)
+    rotate(216deg);
+}
+
+
+.flower b:nth-child(5) {
+  transform:
+    translate(-50%,-100%)
+    rotate(288deg);
+}
+
+
+.flower em {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 20px;
+  height: 20px;
+
+  transform:
+    translate(-50%,-50%);
+
+  border-radius: 50%;
+
+  background: #e7a43e;
+}
+
+
+.flower-purple b {
+  background: #9674a7;
+}
+
+
+.flower-purple em {
+  background: #dfae5d;
+}
+
+
+.flower:hover {
+
+  transform:
+    rotate(8deg)
+    scale(1.08);
+
+  filter:
+    brightness(1.1);
+}
+
+
+.f1 {
+  left: 2%;
+  bottom: 22%;
+}
+
+
+.f2 {
+  right: 2%;
+  bottom: 20%;
+}
+
+
+.f3 {
+  left: 2%;
+  bottom: 21%;
+}
+
+
+.f4 {
+  right: 2%;
+  bottom: 19%;
+}
+
+
+
+/* =========================
+   الزخارف
+========================= */
+
+.confetti i {
+
+  position: absolute;
+
+  z-index: 3;
+
+  color: #e789a0;
+
+  font-style: normal;
+
+  font-size: 18px;
+
+  animation:
+    confettiFloat
+    3s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+.confetti i:nth-child(1) {
+  left: 9%;
+  top: 8%;
+  color:#e5a23d;
+}
+
+
+.confetti i:nth-child(2) {
+  left: 19%;
+  top: 23%;
+}
+
+
+.confetti i:nth-child(3) {
+  left: 72%;
+  top: 13%;
+  color:#9d82b8;
+}
+
+
+.confetti i:nth-child(4) {
+  right: 10%;
+  top: 9%;
+  color:#e8a23e;
+}
+
+
+.confetti i:nth-child(5) {
+  right: 21%;
+  top: 26%;
+  color:#72a9bc;
+}
+
+
+.confetti i:nth-child(6) {
+  left: 14%;
+  bottom: 14%;
+  color:#e7a0ae;
+}
+
+
+.confetti i:nth-child(7) {
+  left: 47%;
+  bottom: 22%;
+  color:#e8a43d;
+}
+
+
+.confetti i:nth-child(8) {
+  right: 14%;
+  bottom: 13%;
+  color:#a07ab4;
+}
+
+
+.confetti i:nth-child(9) {
+  right: 27%;
+  bottom: 27%;
+  color:#df7890;
+}
+
+
+.confetti i:nth-child(10) {
+  left: 45%;
+  top: 18%;
+  color:#e9c67d;
+}
+
+
+@keyframes confettiFloat {
+
+  to {
+
+    transform:
+      translateY(-8px)
+      rotate(12deg);
+
+  }
+
+}
+
+
+
+/* =========================
+   الرسالة النهائية
+========================= */
+
+.message-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(5,4,7,.76);
+
+  backdrop-filter:
+    blur(4px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity .4s ease;
+}
+
+
+.message-overlay.show {
+
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+
+.message-card {
+
+  position: relative;
+
+  width:
+    min(
+      88vw,
+      390px
+    );
+
+  padding:
+    35px 24px;
+
+  color: var(--ink);
+
+  background:
+    linear-gradient(
+      135deg,
+      #f5e5c8,
+      #dfc29d
+    );
+
+  border:
+    2px solid #bd8984;
+
+  box-shadow:
+    7px 8px 0
+    rgba(0,0,0,.28);
+
+  transform:
+    rotate(-1deg)
+    scale(.8);
+
+  transition:
+    transform .45s ease;
+}
+
+
+.message-overlay.show
+.message-card {
+
+  transform:
+    rotate(-1deg)
+    scale(1);
+}
+
+
+.message-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 8px;
+
+  border:
+    1px dashed
+    rgba(100,70,55,.3);
+
+  pointer-events: none;
+}
+
+
+.message-card h2 {
+
+  text-align: center;
+
+  color: #cf6d87;
+
+  font-size: 23px;
+
+  margin-bottom: 12px;
+}
+
+
+.message-card p {
+
+  text-align: center;
+
+  line-height: 2;
+
+  font-size: 15px;
+}
+
+
+.card-flower {
+
+  text-align: center;
+
+  color: #d57b90;
+
+  font-size: 25px;
+
+  margin-bottom: 5px;
+}
+
+
+.card-line {
+
+  width: 55%;
+
+  height: 2px;
+
+  margin:
+    0 auto 18px;
+
+  background:
+    #d87a91;
+}
+
+
+.close-message {
+
+  position: absolute;
+
+  left: 8px;
+  top: 8px;
+
+  width: 30px;
+  height: 30px;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  color: white;
+
+  background: #d4778e;
+
+  cursor: pointer;
+
+  font-size: 20px;
+}
+
+
+
+/* =========================
+   الشاشات الصغيرة جدًا
+========================= */
+
+@media (max-width: 380px) {
+
+  .envelope-button {
+
+    top: 31%;
+
+    width: 78vw;
+  }
+
+
+  .open-envelope {
+
+    top: 23%;
+
+    width: 80vw;
+  }
+
+
+  .balloon {
+
+    width: 50px;
+
+    height: 66px;
+  }
+
+
+  .cake {
+
+    width: 41vw;
+  }
+
+}
